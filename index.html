@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Internet Segura - Guia Prático para Terceira Idade</title>
+    
+    <style>
+        :root {
+            /* Cores padrão com alto contraste para leitura confortável */
+            --bg-principal: #f4f7f9;
+            --bg-card: #ffffff;
+            --texto-cor: #1c2833;
+            --texto-suave: #4a5568;
+            --cor-primaria: #0f4c81;
+            --cor-primaria-hover: #0a355c;
+            --cor-alerta: #c0392b;
+            --cor-alerta-bg: #fdf2e9;
+            --cor-sucesso: #1e8449;
+            --cor-borda: #cbd5e1;
+            --cor-foco: #f39c12;
+            
+            /* Fontes e Tamanhos Base */
+            --tamanho-fonte-base: 20px;
+            --altura-linha: 1.6;
+            --raio-borda: 16px;
+        }
+
+        /* Suporte ao Modo Alto Contraste via CSS Puro (Checkbox) */
+        #toggle-contraste:checked ~ .app-container {
+            --bg-principal: #000000;
+            --bg-card: #121212;
+            --texto-cor: #ffffff;
+            --texto-suave: #e0e0e0;
+            --cor-primaria: #ffff00;
+            --cor-primaria-hover: #ffffff;
+            --cor-alerta: #ff5555;
+            --cor-alerta-bg: #330000;
+            --cor-sucesso: #55ff55;
+            --cor-borda: #ffffff;
+            --cor-foco: #00ffff;
+        }
+
+        /* Suporte ao Texto Grande via CSS Puro */
+        #toggle-fonte:checked ~ .app-container {
+            --tamanho-fonte-base: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #111;
+            color: #333;
+            line-height: var(--altura-linha);
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Esconder checkboxes do controle de acessibilidade */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Container Principal do App */
+        .app-container {
+            font-size: var(--tamanho-fonte-base);
+            background-color: var(--bg-principal);
+            color: var(--texto-cor);
+            width: 100%;
+            max-width: 900px;
+            min-height: 100vh;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Foco Visível para Navegação por Teclado ou Leitores de Tela */
+        *:focus-visible {
+            outline: 4px solid var(--cor-foco) !important;
+            outline-offset: 3px;
+        }
+
+        .painel-acessibilidade {
+            background-color: var(--bg-card);
+            border: 2px solid var(--cor-borda);
+            border-radius: var(--raio-borda);
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .painel-titulo {
+            font-weight: bold;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .botoes-acessibilidade {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-acessivel {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--cor-primaria);
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 0.95em;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            border: 2px solid transparent;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        /* Estilo especial para o alto contraste quando ativo */
+        #toggle-contraste:checked ~ .app-container .btn-contraste {
+            background-color: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+        }
+
+        #toggle-fonte:checked ~ .app-container .btn-fonte {
+            background-color: var(--cor-foco);
+            color: #000000;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 1.9em;
+            color: var(--cor-primaria);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: var(--texto-suave);
+        }
+
+        /* Cartão de Alerta Rápido */
+        .card-emergencia {
+            background-color: var(--cor-alerta-bg);
+            border-left: 8px solid var(--cor-alerta);
+            border-radius: var(--raio-borda);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card-emergencia h2 {
+            color: var(--cor-alerta);
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav.menu-rapido {
+            margin-bottom: 30px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            list-style: none;
+        }
+
+        .menu-link {
+            display: block;
+            background-color: var(--bg-card);
+            border: 2px solid var(--cor-borda);
+            color: var(--cor-primaria);
+            text-decoration: none;
+            padding: 16px;
+            border-radius: var(--raio-borda);
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            transition: border-color 0.2s, transform 0.1s;
+        }
+
+        .menu-link:hover, .menu-link:focus {
+            border-color: var(--cor-primaria);
+            transform: translateY(-2px);
+        }
+
+        section {
+            margin-bottom: 35px;
+            scroll-margin-top: 20px;
+        }
+
+        .titulo-secao {
+            font-size: 1.5em;
+            color: var(--cor-primaria);
+            margin-bottom: 15px;
+            border-bottom: 3px solid var(--cor-primaria);
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Estilo para Sanfonas Interativas (details/summary) sem JS */
+        details.dica-card {
+            background-color: var(--bg-card);
+            border: 2px solid var(--cor-borda);
+            border-radius: var(--raio-borda);
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        summary.dica-titulo {
+            padding: 20px;
+            font-size: 1.15em;
+            font-weight: bold;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            background-color: var(--bg-card);
+        }
+
+        summary.dica-titulo::-webkit-details-marker {
+            display: none;
+        }
+
+        summary.dica-titulo::after {
+            content: "➕";
+            font-size: 1.2em;
+            margin-left: 10px;
+            color: var(--cor-primaria);
+        }
+
+        details[open] summary.dica-titulo::after {
+            content: "➖";
+        }
+
+        details[open] summary.dica-titulo {
+            border-bottom: 2px solid var(--cor-borda);
+            background-color: rgba(0,0,0,0.02);
+        }
+
+        .dica-conteudo {
+            padding: 20px;
+            font-size: 1em;
+        }
+
+        .dica-conteudo ul, .dica-conteudo ol {
+            margin-left: 25px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .dica-conteudo li {
+            margin-bottom: 10px;
+        }
+
+        .passo-alerta {
+            background-color: var(--cor-alerta-bg);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .checklist-box {
+            background-color: var(--bg-card);
+            border: 2px solid var(--cor-borda);
+            border-radius: var(--raio-borda);
+            padding: 20px;
+        }
+
+        .item-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--cor-borda);
+        }
+
+        .item-check:last-child {
+            border-bottom: none;
+        }
+
+        .item-check input[type="checkbox"] {
+            width: 28px;
+            height: 28px;
+            accent-color: var(--cor-sucesso);
+            cursor: pointer;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .item-check label {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Rodapé */
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid var(--cor-borda);
+            text-align: center;
+            color: var(--texto-suave);
+            font-size: 0.9em;
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 600px) {
+            .painel-acessibilidade {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .botoes-acessibilidade {
+                flex-direction: column;
+            }
+            .btn-acessivel {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Checkboxes ocultos que controlam o modo de contraste e tamanho de fonte em todo o documento -->
+    <input type="checkbox" id="toggle-contraste" class="visually-hidden" aria-label="Ativar alto contraste">
+    <input type="checkbox" id="toggle-fonte" class="visually-hidden" aria-label="Aumentar tamanho do texto">
+
+    <!-- Container Principal com Acessibilidade -->
+    <div class="app-container">
+
+        <aside class="painel-acessibilidade" aria-label="Ferramentas de Acessibilidade">
+            <span class="painel-titulo">
+                👁️ Acessibilidade:
+            </span>
+            <div class="botoes-acessibilidade">
+                <label for="toggle-fonte" class="btn-acessivel btn-fonte" tabindex="0" role="button" aria-pressed="false">
+                    🔍 Aumentar Texto
+                </label>
+                <label for="toggle-contraste" class="btn-acessivel btn-contraste" tabindex="0" role="button" aria-pressed="false">
+                    🎨 Alto Contraste
+                </label>
+            </div>
+        </aside>
+
+        <header>
+            <h1>🛡️ Internet Segura na Terceira Idade</h1>
+            <p>Seu guia simples, claro e prático para navegar no celular e computador sem medo.</p>
+        </header>
+
+        <!-- Cartão de Destaque Urgente -->
+        <div class="card-emergencia" role="region" aria-label="Aviso Importante de Segurança">
+            <h2>🚨 Regra Ouro de Segurança</h2>
+            <p><strong>Nenhum banco, empresa ou familiar verdadeiro</strong> vai te pedir senhas, códigos recebidos por SMS ou para fazer transferências com urgência sem antes você confirmar presencialmente ou por ligação.</p>
+        </div>
+
+        <nav class="menu-rapido" aria-label="Navegação Rápida pelos Tópicos">
+            <ul class="menu-grid">
+                <li><a href="#whatsapp" class="menu-link">📱 Golpes no WhatsApp</a></li>
+                <li><a href="#ligacoes" class="menu-link">📞 Ligações Falsas</a></li>
+                <li><a href="#senhas" class="menu-link">🔑 Senhas e Bancos</a></li>
+                <li><a href="#compras" class="menu-link">🛒 Compras Online</a></li>
+                <li><a href="#socorro" class="menu-link">🆘 Caí em um golpe?</a></li>
+                <li><a href="#checklist" class="menu-link">✅ Teste de Segurança</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="whatsapp">
+                <h2 class="titulo-secao">📱 Golpes no WhatsApp</h2>
+                
+                <details class="dica-card">
+                    <summary class="dica-titulo">
+                        1. O golpe do "Falso Parente" (Foto do filho ou neto)
+                    </summary>
+                    <div class="dica-conteudo">
+                        <p><strong>Como funciona:</strong> Um número desconhecido manda mensagem com a foto do seu filho, neto ou parente dizendo: <em>"Mudei de número, me adiciona!"</em>. Pouco depois, pede dinheiro urgente para pagar uma conta.</p>
+                        <div class="passo-alerta">
+                            👉 <strong>O que fazer:</strong> NUNCA envie dinheiro! Ligue para o número antigo do seu parente ou para outro familiar para confirmar se ele realmente mudou de número.
+                        </div>
+                    </div>
+                </details>
+
+                <details class="dica-card">
+                    <summary class="dica-titulo">
+                        2. O código de 6 dígitos recebido por SMS
+                    </summary>
+                    <div class="dica-conteudo">
+                        <p><strong>Como funciona:</strong> Você recebe uma ligação ou mensagem dizendo ser de um restaurante, pousada, emissora de TV ou do governo, pedindo um código que chegou no seu celular para "confirmar um cadastro".</p>
+                        <div class="passo-alerta">
+                            👉 <strong>O que fazer:</strong> Esse código de 6 dígitos é a chave do seu WhatsApp! Se você passar esse número, o criminoso rouba a sua conta. Nunca compartilhe códigos de SMS com ninguém.
+                        </div>
+                    </div>
+                </details>
+            </section>
+
+            <section id="ligacoes">
+                <h2 class="titulo-secao">📞 Ligações Falsas e Cartões</h2>
+
+                <details class="dica-card">
+                    <summary class="dica-titulo">
+                        1. A "Falsa Central do Banco"
+                    </summary>
+                    <div class="dica-conteudo">
+                        <p><strong>Como funciona:</strong> Uma pessoa liga dizendo ser do seu banco, com voz muito educada, avisando sobre uma "compra suspeita no seu cartão". Ela pede para você confirmar sua senha ou fazer uma transferência para "bloquear a conta".</p>
+                        <ul>
+                            <li>O banco NUNCA liga pedindo para você digitar senha.</li>
+                            <li>O banco NUNCA manda motoqueiro buscar o seu cartão em casa.</li>
+                            <li>O banco NUNCA pede para você fazer um Pix para proteção.</li>
+                        </ul>
+                        <div class="passo-alerta">
+                            👉 <strong>O que fazer:</strong> Desligue o telefone imediatamente. Pegue o seu cartão de banco, veja o número de telefone no verso e ligue você mesmo para tirar dúvidas.
+                        </div>
+                    </div>
+                </details>
+            </section>
+
+            <section id="senhas">
+                <h2 class="titulo-secao">🔑 Senhas Seguras</h2>
+
+                <details class="dica-card">
+                    <summary class="dica-titulo">
+                        Como criar e proteger suas senhas de forma simples
+                    </summary>
+                    <div class="dica-conteudo">
+                        <ol>
+                            <li><strong>Evite dados óbvios:</strong> Não use sua data de nascimento, nome de netos ou "123456".</li>
+                            <li><strong>Anote com segurança:</strong> Se precisar anotar as senhas para não esquecer, use um caderno físico e guarde na sua gaveta em casa. <u>Nunca</u> salve senhas em papéis soltos na carteira ou em mensagens no próprio celular.</li>
+                            <li><strong>Não compartilhe:</strong> Não passe senhas do banco nem para vizinhos ou conhecidos prestativos. Se precisar de ajuda, peça a um familiar de extrema confiança.</li>
+                        </ol>
+                    </div>
+                </details>
+            </section>
+
+            <section id="compras">
+                <h2 class="titulo-secao">🛒 Compras na Internet</h2>
+
+                <details class="dica-card">
+                    <summary class="dica-titulo">
+                        Cuidados antes de comprar em lojas virtuais
+                    </summary>
+                    <div class="dica-conteudo">
+                        <ul>
+                            <li><strong>Preços milagrosos:</strong> Desconfie de produtos de marcas conhecidas vendidos por um valor extremamente barato (ex: TV grande por R$ 200).</li>
+                            <li><strong>Atente-se ao cadeado 🔒:</strong> No topo da tela, no endereço do site, deve haver o desenho de um cadeado fechado.</li>
+                            <li><strong>Preferência no pagamento:</strong> Em lojas novas ou desconhecidas, dê preferência a compras no cartão de crédito em vez de Pix ou Boleto, pois o cartão permite cancelar a compra em caso de fraude.</li>
+                        </ul>
+                    </div>
+                </details>
+            </section>
+
+            <section id="socorro">
+                <h2 class="titulo-secao">🆘 Caí em um golpe. O que fazer?</h2>
+                
+                <div class="dica-card" style="padding: 20px;">
+                    <p style="margin-bottom: 15px;">Não se sinta envergonhado! Os criminosos usam técnicas para enganar até pessoas muito experientes. Ação rápida é o mais importante:</p>
+                    
+                    <ol style="margin-left: 20px;">
+                        <li style="margin-bottom: 12px;">
+                            <strong>Avise seu banco imediatamente:</strong> Ligue para o número do verso do cartão ou vá à agência para bloquear senhas e cartões.
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <strong>Registre um Boletim de Ocorrência (B.O.):</strong> Pode ser feito na delegacia mais próxima ou na Delegacia Eletrônica na internet com ajuda de um familiar.
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <strong>Avise seus amigos e familiares:</strong> Se o seu WhatsApp foi clonado, avise pessoas próximas para que não enviem dinheiro caso recebam mensagens em seu nome.
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="checklist">
+                <h2 class="titulo-secao">✅ Checklist da Sua Segurança Diária</h2>
+                <p style="margin-bottom: 15px;">Marque os itens abaixo para conferir se você está navegando com segurança hoje:</p>
+
+                <form class="checklist-box" aria-label="Checklist de hábitos seguros">
+                    <div class="item-check">
+                        <input type="checkbox" id="chk1">
+                        <label for="chk1">Nunca passo senhas ou códigos recebidos por SMS para outras pessoas.</label>
+                    </div>
+                    <div class="item-check">
+                        <input type="checkbox" id="chk2">
+                        <label for="chk2">Ligo para o número antigo do meu familiar antes de enviar qualquer Pix solicitado por mensagem.</label>
+                    </div>
+                    <div class="item-check">
+                        <input type="checkbox" id="chk3">
+                        <label for="chk3">Desligo o telefone se alguém me ligar pedindo senhas do banco.</label>
+                    </div>
+                    <div class="item-check">
+                        <input type="checkbox" id="chk4">
+                        <label for="chk4">Minhas senhas anotadas ficam guardadas em local seguro dentro de casa.</label>
+                    </div>
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <p><strong>Telefones Úteis no Brasil:</strong></p>
+            <p>🚔 Polícia Militar: <strong>190</strong> | 📞 Disque Denúncia: <strong>181</strong></p>
+            <br>
+            <p>Desenvolvido para incentivar a autonomia e a segurança digital da terceira idade.</p>
+        </footer>
+
+    </div>
+</body>
+</html>
