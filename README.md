@@ -1,2 +1,0 @@
-# App-de-Auxilio
-Aplicativo
