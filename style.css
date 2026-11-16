@@ -1,0 +1,163 @@
+/* ==========================================================================
+   CONFIGURAÇÕES GERAIS E ACESSIBILIDADE
+   ========================================================================== */
+
+   * {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px; /* Fonte ampliada para leitura confortável */
+    line-height: 1.6;
+    background-color: #f0f4f8;
+    color: #111111; /* Contraste máximo para leitura */
+    margin: 0;
+    padding: 0;
+}
+
+/* Indicador visual de foco acessível para navegação por teclado */
+a:focus, button:focus {
+    outline: 4px solid #ffcc00;
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   CABEÇALHO E NAVEGAÇÃO
+   ========================================================================== */
+
+header {
+    background-color: #000000; /* Azul escuro de alto contraste */
+    color: #ffffff;
+    padding: 24px 16px;
+    text-align: center;
+    border-bottom: 5px solid #0055a5;
+}
+
+header h1 {
+    margin: 0 0 16px 0;
+    font-size: 32px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    background-color: #0055a5;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    display: inline-block;
+    border: 2px solid #ffffff;
+}
+
+nav ul li a:hover {
+    background-color: #003366;
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   CONTEÚDO PRINCIPAL E SEÇÕES
+   ========================================================================== */
+
+main {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 16px;
+}
+
+section {
+    background-color: #ffffff;
+    margin-bottom: 30px;
+    padding: 28px;
+    border-radius: 10px;
+    border: 3px solid #cccccc;
+}
+
+h2 {
+    color: #002b49;
+    font-size: 28px;
+    margin-top: 0;
+    border-bottom: 3px solid #0055a5;
+    padding-bottom: 8px;
+}
+
+/* ==========================================================================
+   SEÇÃO DE INÍCIO & BOTÃO DE DESTAQUE
+   ========================================================================== */
+
+.hero {
+    background-color: #e6f0fa;
+    border: 3px solid #0055a5;
+    text-align: center;
+}
+
+.btn-destaque {
+    display: inline-block;
+    margin-top: 16px;
+    background-color: #d9381e; /* Vermelho destacado para ação */
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 18px 28px;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 2px solid #000000;
+}
+
+.btn-destaque:hover {
+    background-color: #a8220d;
+}
+
+/* ==========================================================================
+   LISTAS E CARDS DE FRAUDES
+   ========================================================================== */
+
+.lista-acessivel li, .lista-ordenada li {
+    margin-bottom: 16px;
+    padding-left: 8px;
+}
+
+.card-fraude {
+    background-color: #fff9e6;
+    border-left: 8px solid #d9381e;
+    border-top: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 16px;
+    margin-bottom: 20px;
+    border-radius: 0 8px 8px 0;
+}
+
+.card-fraude h3 {
+    color: #990000;
+    margin-top: 0;
+    font-size: 24px;
+}
+
+.secao-ajuda {
+    background-color: #fff3cd;
+    border-color: #ffeba3;
+}
+
+/* ==========================================================================
+   RODAPÉ
+   ========================================================================== */
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #000000;
+    color: #ffffff;
+    margin-top: 40px;
+    font-size: 18px;
+}
